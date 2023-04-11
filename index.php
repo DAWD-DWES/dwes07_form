@@ -54,7 +54,7 @@ if (!empty($_POST)) {
                         <form id="registro" name='registro' novalidate>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                <input type="text" class="form-control"  placeholder="usuario" id='usuario' name='usuario' autofocus>
+                                <input type="text" class="form-control {{ isset($errorUsuario) ? ($errorUsuario ? "is-invalid" : "is-valid") : "" }}"  placeholder="usuario" id='usuario' name='usuario' autofocus>
                                 <div class="invalid-feedback">
                                     Debe tener más de tres caracteres.
                                 </div>
@@ -65,14 +65,14 @@ if (!empty($_POST)) {
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
-                                <input type="password" class="form-control"  placeholder="Repita la contraseña" id='password2' name='password2'>
+                                <input type="password" class="form-control {{ isset($errorPasswords) ? ($errorPasswords ? "is-invalid" : "is-valid") : "" }}"  placeholder="Repita la contraseña" id='password2' name='password2'>
                                 <div class="invalid-feedback">
                                     Deben tener más de 5 caracteres o ser iguales.
                                 </div>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="e-Mail" name='email' id='email'> 
+                                <input type="email" class="form-control {{ isset($errorEmail) ? ($errorEmail ? "is-invalid" : "is-valid") : "" }}" placeholder="e-Mail" name='email' id='email'> 
                                 <div class="invalid-feedback">
                                     La dirección de email NO es válida.
                                 </div>

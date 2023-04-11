@@ -16,12 +16,12 @@ function esValidoPasswords(string $pass1, string $pass2): bool {
 }
 
 if (!empty($_POST)) {
-    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
+    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuario = !esValidoNombre($usuario);
-    $password1 = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
-    $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
+    $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
+    $password2 = filter_input(INPUT_POST, 'password2', FILTER_UNSAFE_RAW);
     $errorPassword = !esValidoPasswords($password1, $password2);
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $email = filter_input(INPUT_POST, 'email', FILTER_UNSAFE_RAW);
     $errorEmail = !esValidoEmail($email);
     $response = compact('errorUsuario', 'errorPassword', 'errorEmail');
     header('Content-type: application/json');

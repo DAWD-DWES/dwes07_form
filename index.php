@@ -38,9 +38,11 @@ if (!empty($_POST)) {
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-            <div class="alert alert-success d-none" id="mensaje" role="alert">
-                Registro realizado con éxito
-            </div>
+            <?php if (isset($_POST['enviar'])): ?>
+                <div class="alert alert-success" id="mensaje" role="alert">
+                    Registro realizado con éxito
+                </div>
+            <?php endif ?>
             <div class="d-flex justify-content-center h-100">
                 <div class="card w-50">
                     <div class="card-header">

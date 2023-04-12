@@ -20,7 +20,8 @@ function validaForm(e) {
                 form.email.setCustomValidity("");
                 const response = objXMLHttpRequest.response;
                 if (!(response.errorUsuario || response.errorPassword || response.errorEmail)) {
-                    document.getElementById('mensaje').classList.remove("d-none");
+                    e.target.submit();
+                   // document.getElementById('mensaje').classList.remove("d-none");
                 } else {
                     if (response.errorUsuario) {
                         form.usuario.setCustomValidity("error");

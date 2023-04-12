@@ -8,7 +8,7 @@ function validaForm(e) {
     e.stopImmediatePropagation();
     const form = e.target;
     var data = new FormData(e.target);
-    document.getElementById('mensaje').classList.add("d-none");
+    data.append("petvalida", true);
     var objXMLHttpRequest = new XMLHttpRequest();
     objXMLHttpRequest.responseType = 'json';
     objXMLHttpRequest.onreadystatechange = function () {
@@ -21,13 +21,14 @@ function validaForm(e) {
                 const response = objXMLHttpRequest.response;
                 if (!(response.errorUsuario || response.errorPassword || response.errorEmail)) {
                     e.target.submit();
-                   // document.getElementById('mensaje').classList.remove("d-none");
                 } else {
                     if (response.errorUsuario) {
                         form.usuario.setCustomValidity("error");
                     }
-                    if (response.errorPassword) {
+                    if (response.errorPassword1) {
                         form.password1.setCustomValidity("error");
+                    }
+                    if (response.errorPasswords) {
                         form.password2.setCustomValidity("error");
                     }
                     if (response.errorEmail) {

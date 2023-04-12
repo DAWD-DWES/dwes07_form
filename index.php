@@ -6,6 +6,11 @@ function esValidoNombre(string $nombre): bool {
 }
 
 // El campo correo debe tener el formato adecuado
+function esValidoPassword(string $pass): bool {
+    return (strlen($pass) > 5);
+}
+
+// El campo correo debe tener el formato adecuado
 function esValidoEmail(string $email): bool {
     return preg_match("/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i", $email);
 }
@@ -15,17 +20,19 @@ function esValidoPasswords(string $pass1, string $pass2): bool {
     return ($pass1 == $pass2) && (strlen($pass1) > 5);
 }
 
-if (!empty($_POST)) {
+if (!empty($_POST) && isset($_POST['petvalida'])) {
     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
     $errorUsuario = !esValidoNombre($usuario);
     $password1 = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
+    $errorPassword1 = !esValidoPassword($password1);
     $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
-    $errorPassword = !esValidoPasswords($password1, $password2);
+    $errorPasswords = !esValidoPasswords($password1, $password2);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $errorEmail = !esValidoEmail($email);
-    $response = compact('errorUsuario', 'errorPassword', 'errorEmail');
+    
+    $response = compact('errorUsuario', 'errorPassword1', 'errorPasswords', 'errorEmail');
     header('Content-type: application/json');
-    echo json_encode($response);
+    echo (json_encode($response));
     die;
 }
 ?>
@@ -42,43 +49,52 @@ if (!empty($_POST)) {
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-            <div class="alert alert-success d-none" id="mensaje" role="alert">
-                Registro realizado con éxito
-            </div>
+            <?php if (!empty ($_POST) && !isset($_POST['petvalida'])): ?>
+                <div class="alert alert-success" id="mensaje" role="alert">
+                    Registro realizado con éxito
+                </div>
+            <?php endif ?>
             <div class="d-flex justify-content-center h-100">
                 <div class="card w-50">
                     <div class="card-header">
                         <h3><i class="bi bi-gear p-2"></i>Registro</h3>
                     </div>
                     <div class="card-body">
-                        <form id="registro" name='registro' novalidate>
+                        <form id="registro" name="registro" method="POST" novalidate>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                <input type="text" class="form-control"  placeholder="usuario" id='usuario' name='usuario' autofocus>
+                                <input type="text" class="form-control"  placeholder="usuario" 
+                                       id="usuario" name="usuario" autofocus>
                                 <div class="invalid-feedback">
                                     Debe tener más de tres caracteres.
                                 </div>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
-                                <input type="password" class="form-control" placeholder="contraseña" id='password1' name='password1'>
+                                <input type="password" class="form-control" placeholder="contraseña" 
+                                       id="password1" name="password1">
+                                <div class="invalid-feedback">
+                                    Deben tener más de cinco caracteres.
+                                </div>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
-                                <input type="password" class="form-control"  placeholder="Repita la contraseña" id='password2' name='password2'>
+                                <input type="password" class="form-control"  placeholder="Repita la contraseña" 
+                                       id="password2" name="password2">
                                 <div class="invalid-feedback">
                                     Deben tener más de 5 caracteres o ser iguales.
                                 </div>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="e-Mail" name='email' id='email'> 
+                                <input type="email" class="form-control" placeholder="e-Mail" 
+                                       id="email" name="email"> 
                                 <div class="invalid-feedback">
                                     La dirección de email NO es válida.
                                 </div>
                             </div>
                             <div class="text-end">
-                                <input type="submit" value="Registrar" class="btn btn-info" name='enviar'>
+                                <input type="submit" value="Registrar" class="btn btn-info" name="enviar">
                             </div>
                         </form>
                     </div>

@@ -6,11 +6,10 @@ function validaForm(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     const form = e.target;
-    $('#mensaje').addClass("d-none");
     $.ajax({
         type: "POST",
         url: 'index.php',
-        data: $(this).serialize(),
+        data: "petvalida=true&" + $(this).serialize(),
         context: form,
         dataType: "json",
         success: function (response)
@@ -20,14 +19,16 @@ function validaForm(e) {
             this.password2.setCustomValidity("");
             this.email.setCustomValidity("");
             if (!(response.errorUsuario || response.errorPassword || response.errorEmail)) {
-                $("#mensaje").removeClass("d-none");
+                e.target.submit();
             } else {
 
                 if (response.errorUsuario) {
                     this.usuario.setCustomValidity("error");
                 }
-                if (response.errorPassword) {
+                if (response.errorPassword1) {
                     this.password1.setCustomValidity("error");
+                }
+                if (response.errorPasswords) {
                     this.password2.setCustomValidity("error");
                 }
                 if (response.errorEmail) {

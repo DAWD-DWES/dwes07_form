@@ -22,10 +22,11 @@
                         <h3><i class="bi bi-gear p-2"></i>Registro</h3>
                     </div>
                     <div class="card-body">
-                        <form id="registro" name='registro' method='POST' action='<?= $_SERVER['PHP_SELF']; ?>' novalidate>
+                        <form id="registro" name="registro" method="POST" action="<?= $_SERVER['PHP_SELF']; ?>" novalidate>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                <input type="text" class="form-control"  placeholder="usuario" id='usuario' name='usuario' minlength="3" autofocus required>
+                                <input type="text" class="form-control"  placeholder="usuario" 
+                                       id="usuario" name="usuario" minlength="3" autofocus required>
                                 <div class="invalid-feedback">
                                     Debe tener más de tres caracteres.
                                 </div>
@@ -33,25 +34,26 @@
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
                                 <input type="password" class="form-control" placeholder="contraseña" 
-                                       id='password1' name='password1' minlength="5" required>
+                                       id="password1" name="password1" minlength="5" required>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
                                 <input type="password" class="form-control"  placeholder="Repita la contraseña" 
-                                       id='password2' name='password2' minlength="5" required>
+                                       id="password2" name="password2" minlength="5" required>
                                 <div class="invalid-feedback">
                                     Deben tener más de 5 caracteres o ser iguales.
                                 </div>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="e-Mail" name='email' id='email' required>
+                                <input type="email" class="form-control" placeholder="e-Mail" 
+                                       id="email" name="email" required>
                                 <div class="invalid-feedback">
                                     La dirección de email NO es válida.
                                 </div>
                             </div>
                             <div class="text-end">
-                                <input type="submit" value="Registrar" class="btn btn-info" name='enviar'>
+                                <input type="submit" value="Registrar" class="btn btn-info" name="enviar">
                             </div>
                         </form>
                     </div>

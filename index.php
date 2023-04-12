@@ -29,7 +29,7 @@ if (!empty($_POST) && isset($_POST['petvalida'])) {
     $errorPasswords = !esValidoPasswords($password1, $password2);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $errorEmail = !esValidoEmail($email);
-    
+
     $response = compact('errorUsuario', 'errorPassword1', 'errorPasswords', 'errorEmail');
     header('Content-type: application/json');
     echo (json_encode($response));
@@ -49,57 +49,58 @@ if (!empty($_POST) && isset($_POST['petvalida'])) {
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-            <?php if (!empty ($_POST) && !isset($_POST['petvalida'])): ?>
+            <?php if (!empty($_POST) && !isset($_POST['petvalida'])): ?>
                 <div class="alert alert-success" id="mensaje" role="alert">
                     Registro realizado con éxito
                 </div>
-            <?php endif ?>
-            <div class="d-flex justify-content-center h-100">
-                <div class="card w-50">
-                    <div class="card-header">
-                        <h3><i class="bi bi-gear p-2"></i>Registro</h3>
-                    </div>
-                    <div class="card-body">
-                        <form id="registro" name="registro" method="POST" novalidate>
-                            <div class="input-group my-2">
-                                <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                <input type="text" class="form-control"  placeholder="usuario" 
-                                       id="usuario" name="usuario" autofocus>
-                                <div class="invalid-feedback">
-                                    Debe tener más de tres caracteres.
+            <?php else: ?>
+                <div class="d-flex justify-content-center h-100">
+                    <div class="card w-50">
+                        <div class="card-header">
+                            <h3><i class="bi bi-gear p-2"></i>Registro</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="registro" name="registro" method="POST" novalidate>
+                                <div class="input-group my-2">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control"  placeholder="usuario" 
+                                           id="usuario" name="usuario" autofocus>
+                                    <div class="invalid-feedback">
+                                        Debe tener más de tres caracteres.
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-group my-2">
-                                <span class="input-group-text"><i class="bi bi-key"></i></span>
-                                <input type="password" class="form-control" placeholder="contraseña" 
-                                       id="password1" name="password1">
-                                <div class="invalid-feedback">
-                                    Deben tener más de cinco caracteres.
+                                <div class="input-group my-2">
+                                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                    <input type="password" class="form-control" placeholder="contraseña" 
+                                           id="password1" name="password1">
+                                    <div class="invalid-feedback">
+                                        Deben tener más de cinco caracteres.
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-group my-2">
-                                <span class="input-group-text"><i class="bi bi-key"></i></span>
-                                <input type="password" class="form-control"  placeholder="Repita la contraseña" 
-                                       id="password2" name="password2">
-                                <div class="invalid-feedback">
-                                    Deben tener más de 5 caracteres o ser iguales.
+                                <div class="input-group my-2">
+                                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                    <input type="password" class="form-control"  placeholder="Repita la contraseña" 
+                                           id="password2" name="password2">
+                                    <div class="invalid-feedback">
+                                        Deben tener más de 5 caracteres o ser iguales.
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-group my-2">
-                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="e-Mail" 
-                                       id="email" name="email"> 
-                                <div class="invalid-feedback">
-                                    La dirección de email NO es válida.
+                                <div class="input-group my-2">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <input type="email" class="form-control" placeholder="e-Mail" 
+                                           id="email" name="email"> 
+                                    <div class="invalid-feedback">
+                                        La dirección de email NO es válida.
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="text-end">
-                                <input type="submit" value="Registrar" class="btn btn-info" name="enviar">
-                            </div>
-                        </form>
+                                <div class="text-end">
+                                    <input type="submit" value="Registrar" class="btn btn-info" name="enviar">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endif ?>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

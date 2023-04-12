@@ -35,6 +35,9 @@
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
                                 <input type="password" class="form-control" placeholder="contraseña" 
                                        id="password1" name="password1" minlength="5" required>
+                                <div class="invalid-feedback">
+                                    Deben tener más de 5 caracteres.
+                                </div>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>

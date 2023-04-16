@@ -8,7 +8,7 @@ function validaForm(e) {
     e.stopImmediatePropagation();
     const form = e.target;
     var data = new FormData(e.target);
-    data.append("petvalida", true);
+    data.append(form.enviar.name, form.enviar.value);
     var objXMLHttpRequest = new XMLHttpRequest();
     objXMLHttpRequest.responseType = 'json';
     objXMLHttpRequest.onreadystatechange = function () {

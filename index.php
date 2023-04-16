@@ -20,12 +20,12 @@ function esValidoPasswords(string $pass1, string $pass2): bool {
     return ($pass1 === $pass2);
 }
 
-if (!empty($_POST) && isset($_POST['petvalida'])) {
-    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
+if (!empty($_POST) && isset($_POST['enviar'])) {
+    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuario = !esValidoNombre($usuario);
-    $password1 = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
+    $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
     $errorPassword1 = !esValidoPassword($password1);
-    $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
+    $password2 = filter_input(INPUT_POST, 'password2', FILTER_UNSAFE_RAW);
     $errorPasswords = !esValidoPasswords($password1, $password2);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $errorEmail = !esValidoEmail($email);
@@ -49,7 +49,7 @@ if (!empty($_POST) && isset($_POST['petvalida'])) {
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-            <?php if (!empty($_POST) && !isset($_POST['petvalida'])): ?>
+            <?php if (!empty($_POST) && !isset($_POST['enviar'])): ?>
                 <div class="alert alert-success" id="mensaje" role="alert">
                     Registro realizado con éxito
                 </div>
@@ -90,7 +90,7 @@ if (!empty($_POST) && isset($_POST['petvalida'])) {
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <input type="submit" value="Registrar" class="btn btn-info" name='enviar'>
+                                    <input type="submit" id="enviar" value="Registrar" class="btn btn-info" name='enviar'>
                                 </div>
                             </form>
                         </div>

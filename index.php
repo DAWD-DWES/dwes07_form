@@ -20,7 +20,7 @@ function esValidoPasswords(string $pass1, string $pass2): bool {
     return ($pass1 == $pass2) && (strlen($pass1) > 5);
 }
 
-if (!empty($_POST) && isset($_POST['petvalida'])) {
+if (!empty($_POST) && isset($_POST['enviar'])) {
     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuario = !esValidoNombre($usuario);
     $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
@@ -49,7 +49,7 @@ if (!empty($_POST) && isset($_POST['petvalida'])) {
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-            <?php if (!empty($_POST) && !isset($_POST['petvalida'])): ?>
+            <?php if (!empty($_POST) && !isset($_POST['enviar'])): ?>
                 <div class="alert alert-success" id="mensaje" role="alert">
                     Registro realizado con éxito
                 </div>
@@ -94,7 +94,7 @@ if (!empty($_POST) && isset($_POST['petvalida'])) {
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <input type="submit" value="Registrar" class="btn btn-info" name="enviar">
+                                    <input type="submit" id="enviar" value="Registrar" class="btn btn-info" name="enviar">
                                 </div>
                             </form>
                         </div>

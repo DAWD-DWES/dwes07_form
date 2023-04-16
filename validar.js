@@ -9,7 +9,7 @@ function validaForm(e) {
     $.ajax({
         type: "POST",
         url: 'index.php',
-        data: "petvalida=true&" + $(this).serialize(),
+        data: $(this).serialize() + `&${form.enviar.name}=${form.enviar.value}`,
         context: form,
         dataType: "json",
         success: function (response)

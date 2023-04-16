@@ -19,7 +19,7 @@ function validaForm(e) {
             this.password2.setCustomValidity("");
             this.email.setCustomValidity("");
             if (!(response.errorUsuario || response.errorPassword || response.errorEmail)) {
-                e.target.submit();
+                this.submit();
             } else {
 
                 if (response.errorUsuario) {

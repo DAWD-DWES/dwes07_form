@@ -21,11 +21,11 @@ function esValidoPasswords(string $pass1, string $pass2): bool {
 }
 
 if (!empty($_POST) && isset($_POST['petvalida'])) {
-    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
+    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuario = !esValidoNombre($usuario);
-    $password1 = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
+    $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
     $errorPassword1 = !esValidoPassword($password1);
-    $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
+    $password2 = filter_input(INPUT_POST, 'password2', FILTER_UNSAFE_RAW);
     $errorPasswords = !esValidoPasswords($password1, $password2);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $errorEmail = !esValidoEmail($email);

@@ -21,7 +21,6 @@ function validaForm(e) {
             if (!(response.errorUsuario || response.errorPassword || response.errorEmail)) {
                 this.submit();
             } else {
-
                 if (response.errorUsuario) {
                     this.usuario.setCustomValidity("error");
                 }

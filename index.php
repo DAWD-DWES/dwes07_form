@@ -20,7 +20,7 @@ function esValidoPasswords(string $pass1, string $pass2): bool {
     return ($pass1 == $pass2) && (strlen($pass1) > 5);
 }
 
-if (!empty($_POST) && isset($_POST['enviar'])) {
+if (filter_has_var(INPUT_POST, 'enviar')) {
     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuario = !esValidoNombre($usuario);
     $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);

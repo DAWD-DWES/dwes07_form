@@ -39,7 +39,7 @@ if (filter_has_var(INPUT_POST, 'enviar')) {
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-<?php if (isset($error) && !$error): ?>
+            <?php if (isset($error) && !$error): ?>
                 <div class="alert alert-success" id="mensaje" role="alert">
                     Registro realizado con éxito
                 </div>

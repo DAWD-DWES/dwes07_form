@@ -2,7 +2,7 @@
 
 // El campo nombre debe tener más de 3 caracteres
 function esValidoNombre(string $nombre): bool {
-    return (strlen($nombre) > 3);
+    return preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ' -]{3,}$/", $nombre);
 }
 
 // El campo correo debe tener el formato adecuado
@@ -10,19 +10,20 @@ function esValidoEmail(string $email): bool {
     return preg_match("/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i", $email);
 }
 
-// Las contraseñas deben de  coincidir
+// Las contraseñas deben de  coincidir con una letra minúscula, otra mayúscula, un digito y una caracter de control con al menos 8 caracteres
 function esValidoPasswords(string $pass1, string $pass2): bool {
-    return ($pass1 == $pass2) && (strlen($pass1) > 5);
+    return (($pass1 === $pass2) && (strlen($pass1) >= 8) && preg_match('/[a-z]/', $pass1) && preg_match('/[A-Z]/', $pass1) && preg_match('/[0-9]/', $pass1) && preg_match('/[\W_]/', $pass1));
 }
 
-if (!empty($_POST)) {
+if (filter_has_var(INPUT_POST, 'enviar')) {
     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuario = !esValidoNombre($usuario);
     $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
     $password2 = filter_input(INPUT_POST, 'password2', FILTER_UNSAFE_RAW);
-    $errorPasswords = !esValidoPasswords($password1, $password2);
+    $errorPassword = !esValidoPasswords($password1, $password2);
     $email = filter_input(INPUT_POST, 'email', FILTER_UNSAFE_RAW);
     $errorEmail = !esValidoEmail($email);
+    $error = $errorUsuario | $errorEmail | $errorPassword;
 }
 ?>
 <!DOCTYPE html>
@@ -38,7 +39,7 @@ if (!empty($_POST)) {
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-            <?php if (isset($_POST['enviar'])): ?>
+<?php if (isset($error) && !$error): ?>
                 <div class="alert alert-success" id="mensaje" role="alert">
                     Registro realizado con éxito
                 </div>
@@ -64,10 +65,10 @@ if (!empty($_POST)) {
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
-                                <input type="password" class="form-control <?= isset($errorPasswords) ? ($errorPasswords ? "is-invalid" : "is-valid") : "" ?>"  
+                                <input type="password" class="form-control <?= isset($errorPassword) ? ($errorPassword ? "is-invalid" : "is-valid") : "" ?>"  
                                        placeholder="Repita la contraseña" id="password2" name="password2">
                                 <div class="invalid-feedback">
-                                    Deben tener más de 5 caracteres o ser iguales.
+                                    Deben tener más de 8 caracteres (minúscula, mayúscula, digito y caracter espercial) o ser iguales.
                                 </div>
                             </div>
                             <div class="input-group my-2">

@@ -11,7 +11,7 @@
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-            <?php if (isset($_POST['enviar'])): ?>
+            <?php if (filter_has_var(INPUT_POST, 'enviar')): ?>
                 <div class="alert alert-success" id="mensaje" role="alert">
                     Registro realizado con éxito
                 </div>

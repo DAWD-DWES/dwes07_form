@@ -11,21 +11,33 @@ function esValidoEmail(string $email): bool {
 }
 
 // Las contraseñas deben de  coincidir con una letra minúscula, otra mayúscula, un digito y una caracter de control con al menos 8 caracteres
-function esValidoPasswords(string $pass1, string $pass2): bool {
-    return (($pass1 === $pass2) && (strlen($pass1) >= 8) && preg_match('/[a-z]/', $pass1) && preg_match('/[A-Z]/', $pass1) && preg_match('/[0-9]/', $pass1) && preg_match('/[\W_]/', $pass1));
+function esValidoPassword(string $pass1, string $pass2): bool {
+    return (preg_match("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}/", $pass1));
+}
+
+function esPasswordRepetido(string $pass1, string $pass2): bool {
+    return ($pass1 === $pass2);
 }
 
 if (filter_has_var(INPUT_POST, 'enviar')) {
     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
-    $errorUsuario = !esValidoNombre($usuario);
+    $errorUsuarioFormato = !esValidoNombre($usuario);
     $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
     $password2 = filter_input(INPUT_POST, 'password2', FILTER_UNSAFE_RAW);
-    $errorPassword = !esValidoPasswords($password1, $password2);
+    $errorPasswordFormato = !esValidoPassword($password1, $password2);
+    $errorPasswordRepetido = !esPasswordRepetido($password1, $password2);
+    $errorPassword = $errorPasswordFormato || $errorPasswordRepetido;
     $email = filter_input(INPUT_POST, 'email', FILTER_UNSAFE_RAW);
-    $errorEmail = !esValidoEmail($email);
-    $error = $errorUsuario | $errorEmail | $errorPassword;
+    $errorEmailFormato = !esValidoEmail($email);
+    $error = $errorUsuarioFormato || $errorEmailFormato || $errorPassword;
 }
+
+define("RETRO_NOMBRE_FORMATO", "El nombre de estar formado por al menos 3 caracteres de palabra");
+define("RETRO_EMAIL_FORMATO", "El correo debe tener un formato correcto");
+define("RETRO_PASS_REPETIDO", "Los passwords introducidos deben de ser iguales");
+define("RETRO_PASS_FORMATO", "El password debe tener una minúscula, mayúscula, digito y caracter espercial");
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -53,30 +65,35 @@ if (filter_has_var(INPUT_POST, 'enviar')) {
                         <form id="registro" name="registro" action="index.php" method="POST" novalidate>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                <input type="text" class="form-control <?= isset($errorUsuario) ? ($errorUsuario ? "is-invalid" : "is-valid") : "" ?>"  placeholder="usuario" 
+                                <input type="text" class="form-control <?= isset($errorUsuarioFormato) ? ($errorUsuarioFormato ? "is-invalid" : "is-valid") : "" ?>"  placeholder="usuario" 
                                        id="usuario" name="usuario" value="<?= $usuario ?? '' ?>" autofocus>
                                 <div class="invalid-feedback">
-                                    Debe tener más de tres caracteres.
+                                    <?= RETRO_NOMBRE_FORMATO ?>
                                 </div>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
-                                <input type="password" class="form-control" placeholder="contraseña" id="password1" name="password1">
+                                <input type="password" class="form-control" placeholder="contraseña" id="password1" name="password1" 
+                                       value="<?= $password1 ?? '' ?>">
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-key"></i></span>
                                 <input type="password" class="form-control <?= isset($errorPassword) ? ($errorPassword ? "is-invalid" : "is-valid") : "" ?>"  
-                                       placeholder="Repita la contraseña" id="password2" name="password2">
+                                       placeholder="Repita la contraseña" id="password2" name="password2" value="<?= $password2 ?? '' ?>">
                                 <div class="invalid-feedback">
-                                    Deben tener más de 8 caracteres (minúscula, mayúscula, digito y caracter espercial) o ser iguales.
+                                    <?php if (isset($errorPasswordRepetido) && $errorPasswordRepetido): ?> 
+                                        <?= RETRO_PASS_REPETIDO ?>
+                                    <?php elseif (isset($errorPassword) && $errorPassword): ?> 
+                                        <br><?= RETRO_PASS_FORMATO ?>
+                                    <?php endif ?>
                                 </div>
                             </div>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control <?= isset($errorEmail) ? ($errorEmail ? "is-invalid" : "is-valid") : "" ?>" 
-                                       placeholder="e-Mail" name="email" id="email" value="<?= $email ?? '' ?>"> 
+                                <input type="email" class="form-control <?= isset($errorEmailFormato) ? ($errorEmailFormato ? "is-invalid" : "is-valid") : "" ?>"
+                                       placeholder="e-Mail" name="email" id="email" value="<?= $email ?? '' ?>">
                                 <div class="invalid-feedback">
-                                    La dirección de email NO es válida.
+                                    <?= RETRO_EMAIL_FORMATO ?>
                                 </div>
                             </div>
                             <div class="text-end">
@@ -87,6 +104,6 @@ if (filter_has_var(INPUT_POST, 'enviar')) {
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity = "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin = "anonymous"></script>
     </body>
 </html>

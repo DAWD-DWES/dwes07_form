@@ -2,7 +2,7 @@
 
 // El campo nombre debe tener más de 3 caracteres
 function esValidoNombre(string $nombre): bool {
-    return preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ' -]{3,}$/", $nombre);
+    return preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ' _\-]{3,}$/", $nombre);
 }
 
 // El campo correo debe tener el formato adecuado

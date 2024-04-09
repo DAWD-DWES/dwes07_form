@@ -26,17 +26,17 @@
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
                                     <input type="text" class="form-control"  placeholder="usuario" 
-                                           id="usuario" name="usuario" minlength="3" autofocus required>
+                                           id="usuario" name="usuario" minlength="3" autofocus required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ' _\-]{3,}$">
                                 </div>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control" placeholder="contraseña" 
-                                           id='password1' name='password1' minlength="5" required>
+                                           id='password1' name='password1' minlength="5" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
                                 </div>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control"  placeholder="Repita la contraseña" 
-                                           id="password2" name="password2" minlength="5" required>
+                                           id="password2" name="password2" minlength="5" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
                                 </div>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>

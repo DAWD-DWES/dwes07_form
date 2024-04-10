@@ -1,28 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const formRegistro = document.getElementById('registro');
-    formRegistro.addEventListener("submit", (event) => {
-        const allValid = formRegistro.checkValidity();
-        if (!allValid) {
-            event.preventDefault();
-        }
-    });
-    const fields = Array.from(formRegistro.elements);
-    fields.forEach((field) => {
-        field.addEventListener("invalid", () => {
-            console.log(field.validity);
-        });
-    });
-    fields.forEach((field) => {
-        const errorBox = document.getElementById(field.id + "Error");
-        field.addEventListener("invalid", () => {
-            errorBox.textContent = field.validationMessage;
-            // e.g. "Please fill out this field"
-        });
-        field.addEventListener("input", () => {
-            field.setAttribute("aria-invalid", false);
-            errorBox.textContent = "";
-        });
-    });
+    formRegistro.addEventListener('submit', validaForm);
 });
 
 function validaForm(e) {

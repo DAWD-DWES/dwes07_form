@@ -22,27 +22,31 @@
                             <h3><i class="bi bi-gear p-2"></i>Registro</h3>
                         </div>
                         <div class="card-body">
-                            <form id="registro" name="registro" method="POST" action="<?= $_SERVER['PHP_SELF']; ?>" novalidate>
+                            <form id="registro" name="registro" method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" novalidate>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
                                     <input type="text" class="form-control"  placeholder="usuario" 
                                            id="usuario" name="usuario" minlength="3" autofocus required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ' _\-]{3,}$">
                                 </div>
+                                <div class="text-danger" id="usuarioError"></div>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control" placeholder="contraseña" 
-                                           id='password1' name='password1' minlength="5" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
+                                           id="password1" name="password1" minlength="8" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
                                 </div>
+                                <div class="text-danger" id="password1Error"></div>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control"  placeholder="Repita la contraseña" 
-                                           id="password2" name="password2" minlength="5" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
+                                           id="password2" name="password2" minlength="8" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
                                 </div>
+                                <div class="text-danger" id="password2Error"></div>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
                                     <input type="email" class="form-control" placeholder="e-Mail" name="email" 
                                            id="email" required>
                                 </div>
+                                <div class="text-danger" id="emailError"></div>
                                 <div class="text-end">
                                     <input type="submit" value="Registrar" class="btn btn-info" name="enviar">
                                 </div>

@@ -12,18 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(field.validity);
         });
     });
-    /* fields.forEach((field) => {
-     const errorBox = document.getElementById(field.id + "Error");
-     field.addEventListener("invalid", () => {
-     errorBox.textContent = field.validationMessage;
-     // e.g. "Please fill out this field"
-     });
-     field.addEventListener("input", () => {
-     const valid = field.checkValidity();
-     if (valid) {
-     errorBox.textContent = "";
-     }
-     }); */
     fields.forEach((field) => {
         const errorBox = document.getElementById(field.id + "Error");
 

@@ -28,7 +28,7 @@
                                     <input type="text" class="form-control"  placeholder="usuario" 
                                            id="usuario" name="usuario" minlength="3" autofocus required>
                                     <div class="invalid-feedback">
-                                        Debe tener más de tres caracteres.
+                                        El nombre de estar formado por al menos 3 caracteres de palabra
                                     </div>
                                 </div>
                                 <div class="input-group my-2">
@@ -36,7 +36,7 @@
                                     <input type="password" class="form-control" placeholder="contraseña" 
                                            id="password1" name="password1" minlength="5" required>
                                     <div class="invalid-feedback">
-                                        Deben tener más de 5 caracteres.
+                                        El password debe tener una minúscula, mayúscula, digito y caracter espercial
                                     </div>
                                 </div>
                                 <div class="input-group my-2">
@@ -44,7 +44,7 @@
                                     <input type="password" class="form-control"  placeholder="Repita la contraseña" 
                                            id="password2" name="password2" minlength="5" required>
                                     <div class="invalid-feedback">
-                                        Deben tener más de 5 caracteres o ser iguales.
+                                        El password debe tener una minúscula, mayúscula, digito y caracter espercial
                                     </div>
                                 </div>
                                 <div class="input-group my-2">
@@ -52,7 +52,7 @@
                                     <input type="email" class="form-control" placeholder="e-Mail" 
                                            id="email" name="email" required>
                                     <div class="invalid-feedback">
-                                        La dirección de email NO es válida.
+                                        El correo debe tener un formato correcto
                                     </div>
                                 </div>
                                 <div class="text-end">

@@ -53,9 +53,9 @@
                             </form>
                         </div>
                     </div>
+                    <script src="validar.js"></script>
                 </div>
             <?php endif ?>
         </div>
-        <script src="validar.js"></script>
     </body>
 </html>

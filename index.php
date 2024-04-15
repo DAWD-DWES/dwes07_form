@@ -1,20 +1,17 @@
 <?php
-
 if (filter_has_var(INPUT_POST, 'enviar')) {
-    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_VALIDATE_REGEXP, ["options" => [
-            "regexp" => "/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+){0,5}$/"]]);
-    $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW); 
+    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
+    $errorUsuarioFormato = (filter_var($usuario, FILTER_VALIDATE_REGEXP, ["options" => [
+                    "regexp" => "/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+){0,5}$/"]]) === false);
+    $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
     $password2 = filter_input(INPUT_POST, 'password2', FILTER_UNSAFE_RAW);
-    $errorPasswordRepetido = ($password1 !== $password2);
-    $password1 = filter_var ($password1, FILTER_VALIDATE_REGEXP, ["options" => [
-            "regexp" => "/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}/"]]);
-    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_REGEXP, ["options" => [
-            "regexp" => "/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i"]]);
-
-    $errorUsuarioFormato = ($usuario === false || $usuario === null);
-    $errorPasswordFormato = ($password1 === false || $password1 === null);
-    $errorPassword = $errorPasswordFormato || $errorPasswordRepetido;
-    $errorEmailFormato = ($email === false || $email === null);
+    $errorPasswordNoRepetido = ($password1 !== $password2);
+    $errorPasswordFormato = (filter_var($password1, FILTER_VALIDATE_REGEXP, ["options" => [
+                    "regexp" => "/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}/"]]) === false);
+    $email = filter_input(INPUT_POST, 'email', FILTER_UNSAFE_RAW);
+    $errorEmailFormato = (filter_var($email, FILTER_VALIDATE_REGEXP, ["options" => [
+                    "regexp" => "/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i"]]) === false);
+    $errorPassword = $errorPasswordFormato || $errorPasswordNoRepetido;
     $error = $errorUsuarioFormato || $errorEmailFormato || $errorPassword;
 }
 
@@ -67,7 +64,7 @@ define("RETRO_PASS_FORMATO", "El password debe tener una minúscula, mayúscula,
                                 <input type="password" class="form-control <?= isset($errorPassword) ? ($errorPassword ? "is-invalid" : "is-valid") : "" ?>"  
                                        placeholder="Repita la contraseña" id="password2" name="password2" value="<?= $password2 ?? '' ?>">
                                 <div class="invalid-feedback">
-                                    <?php if (isset($errorPasswordRepetido) && $errorPasswordRepetido): ?> 
+                                    <?php if (isset($errorPasswordNoRepetido) && $errorPasswordNoRepetido): ?> 
                                         <?= RETRO_PASS_REPETIDO ?>
                                     <?php elseif (isset($errorPassword) && $errorPassword): ?> 
                                         <br><?= RETRO_PASS_FORMATO ?>

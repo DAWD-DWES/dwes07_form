@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const formRegistro = document.getElementById('registro');
     // Añade el evento submit al formulario
@@ -29,10 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const fields = Array.from(formRegistro.elements);
     fields.forEach((field) => {
         const errorBox = document.getElementById(field.id + "Error");
-
         field.addEventListener("invalid", (event) => {
             let message = "";
-            if (field.id === "usuario" && (field.validity.valueMissing || field.validity.patternMismatch)) {
+            if (field.id === "usuario" && (field.validity.valueMissing || field.validity.tooShort || field.validity.patternMismatch)) {
                 message = "El nombre debe estar formado por al menos 3 caracteres de palabra.";
             } else if (field.id === 'password2' && (field.validity.valueMissing || field.validity.patternMismatch)) {
                 message = "El password debe tener una minúscula, mayúscula, dígito y caracter especial";

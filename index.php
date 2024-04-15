@@ -33,13 +33,13 @@
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control" placeholder="contraseña" 
-                                           id="password1" name="password1" minlength="8" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
+                                           id="password1" name="password1" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
                                 </div>
                                 <div class="text-danger" id="password1Error"></div>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control"  placeholder="Repita la contraseña" 
-                                           id="password2" name="password2" minlength="8" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
+                                           id="password2" name="password2" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
                                 </div>
                                 <div class="text-danger" id="password2Error"></div>
                                 <div class="input-group my-2">

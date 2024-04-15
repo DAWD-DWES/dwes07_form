@@ -26,7 +26,7 @@
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
                                     <input type="text" class="form-control"  placeholder="usuario" 
-                                           id="usuario" name="usuario" minlength="3" autofocus required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ' _\-]{3,}$">
+                                           id="usuario" name="usuario" minlength="3" autofocus required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+){0,5}$">
                                 </div>
                                 <div class="text-danger" id="usuarioError"></div>
                                 <div class="input-group my-2">

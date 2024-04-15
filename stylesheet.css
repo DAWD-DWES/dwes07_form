@@ -1,9 +1,9 @@
-input:valid {
+input:valid:focus {
     border: 2px solid green;
     background-color: #eaffea;
 }
 
-input:invalid {
+input:invalid:focus {
     border: 2px solid red;
     background-color: #ffecec;
 }

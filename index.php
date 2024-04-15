@@ -26,7 +26,7 @@
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
                                     <input type="text" class="form-control"  placeholder="usuario" 
-                                           id="usuario" name="usuario" minlength="3" autofocus required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+){0,5}$">
+                                           id="usuario" name="usuario" minlength="3" autofocus required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'\-`´]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'\-`´]+){0,5}$">
                                     <div class="invalid-feedback">
                                         El nombre de estar formado por al menos 3 caracteres de palabra
                                     </div>

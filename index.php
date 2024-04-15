@@ -26,7 +26,7 @@
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
                                     <input type="text" class="form-control"  placeholder="usuario" 
-                                           id="usuario" name="usuario" minlength="3" autofocus required>
+                                           id="usuario" name="usuario" minlength="3" autofocus required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+){0,5}$">
                                     <div class="invalid-feedback">
                                         El nombre de estar formado por al menos 3 caracteres de palabra
                                     </div>
@@ -34,15 +34,13 @@
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control" placeholder="contraseña" 
-                                           id="password1" name="password1" minlength="5" required>
-                                    <div class="invalid-feedback">
-                                        El password debe tener una minúscula, mayúscula, digito y caracter espercial
-                                    </div>
+                                           id="password1" name="password1" minlength="5" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
+                                    
                                 </div>
                                 <div class="input-group my-2">
                                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control"  placeholder="Repita la contraseña" 
-                                           id="password2" name="password2" minlength="5" required>
+                                           id="password2" name="password2" minlength="5" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
                                     <div class="invalid-feedback">
                                         El password debe tener una minúscula, mayúscula, digito y caracter espercial
                                     </div>

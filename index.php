@@ -1,34 +1,20 @@
 <?php
 
-// El campo nombre debe tener más de 3 caracteres
-function esValidoNombre(string $nombre): bool {
-    return preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ' _\-]{3,}$/", $nombre);
-}
-
-// El campo correo debe tener el formato adecuado
-function esValidoEmail(string $email): bool {
-    return preg_match("/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i", $email);
-}
-
-// Las contraseñas deben de  coincidir con una letra minúscula, otra mayúscula, un digito y una caracter de control con al menos 8 caracteres
-function esValidoPassword(string $pass1, string $pass2): bool {
-    return (preg_match("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}/", $pass1));
-}
-
-function esPasswordRepetido(string $pass1, string $pass2): bool {
-    return ($pass1 === $pass2);
-}
-
 if (filter_has_var(INPUT_POST, 'enviar')) {
-    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
-    $errorUsuarioFormato = !esValidoNombre($usuario);
-    $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
+    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_VALIDATE_REGEXP, ["options" => [
+            "regexp" => "/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+){0,5}$/"]]);
+    $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW); 
     $password2 = filter_input(INPUT_POST, 'password2', FILTER_UNSAFE_RAW);
-    $errorPasswordFormato = !esValidoPassword($password1, $password2);
-    $errorPasswordRepetido = !esPasswordRepetido($password1, $password2);
+    $errorPasswordRepetido = ($password1 !== $password2);
+    $password1 = filter_var ($password1, FILTER_VALIDATE_REGEXP, ["options" => [
+            "regexp" => "/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}/"]]);
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_REGEXP, ["options" => [
+            "regexp" => "/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i"]]);
+
+    $errorUsuarioFormato = ($usuario === false || $usuario === null);
+    $errorPasswordFormato = ($password1 === false || $password1 === null);
     $errorPassword = $errorPasswordFormato || $errorPasswordRepetido;
-    $email = filter_input(INPUT_POST, 'email', FILTER_UNSAFE_RAW);
-    $errorEmailFormato = !esValidoEmail($email);
+    $errorEmailFormato = ($email === false || $email === null);
     $error = $errorUsuarioFormato || $errorEmailFormato || $errorPassword;
 }
 

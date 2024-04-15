@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const allValid = formRegistro.checkValidity();
         if (!allValid) {
             event.preventDefault();
+            e.stopImmediatePropagation();
         }
         const password1 = document.getElementById('password1');
         const password2 = document.getElementById('password2');
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             password2.setCustomValidity("Los passwords introducidos deben de ser iguales");
             passwordErrorBox.textContent = password2.validationMessage;
             event.preventDefault(); // Previene el envío del formulario
+            e.stopImmediatePropagation();
         }
     });
 

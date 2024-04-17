@@ -60,7 +60,7 @@ if (filter_has_var(INPUT_POST, 'enviar')) {
                         <h3><i class="bi bi-gear p-2"></i>Registro</h3>
                     </div>
                     <div class="card-body">
-                        <form id="registro" name="registro" action="index.php" method="POST" novalidate>
+                        <form id="registro" name="registro" action="index.php" method="POST" class="needs-validation" novalidate>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-person"></i></span>
                                 <input type="text" class="form-control"  placeholder="usuario" 

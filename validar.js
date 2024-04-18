@@ -6,22 +6,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const allValid = formRegistro.checkValidity();
         if (!allValid) {
             event.preventDefault();
-            e.stopImmediatePropagation();
+            event.stopImmediatePropagation();
         }
         const password1 = document.getElementById('password1');
         const password2 = document.getElementById('password2');
         const passwordErrorBox = document.getElementById('password2Error');
 
         // Limpia cualquier estado de error previo
-        password1.setCustomValidity("");
         password2.setCustomValidity("");
 
         // Verifica si las contraseñas coinciden
         if (password1.value !== password2.value) {
             password2.setCustomValidity("Los passwords introducidos deben de ser iguales");
-            passwordErrorBox.textContent = password2.validationMessage;
+            //   passwordErrorBox.textContent = password2.validationMessage;
             event.preventDefault(); // Previene el envío del formulario
-            e.stopImmediatePropagation();
+            event.stopImmediatePropagation();
         }
     });
 
@@ -43,7 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         field.addEventListener("input", () => {
-            field.setCustomValidity(""); // Limpia el mensaje de error personalizado
+            field.setCustomValidity("");
+            // Limpia el mensaje de error personalizado
             errorBox.textContent = ""; // Limpia el texto del error
         });
     });

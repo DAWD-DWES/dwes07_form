@@ -3,7 +3,7 @@
  registroForm.addEventListener("submit", validaForm);
  }); */
 
-document.getElementById('registro').addEventListener('submit', function (event) {
+function valida2Form(e) {
     event.preventDefault();
     const form = this;
 
@@ -16,6 +16,8 @@ document.getElementById('registro').addEventListener('submit', function (event) 
     // Preparar datos del formulario para enviar
     const formData = new FormData(form);
     formData.append(form.enviar.name, form.enviar.value);
+    
+    
     const xhr = new XMLHttpRequest();
 
     // Configurar la solicitud
@@ -57,41 +59,12 @@ document.getElementById('registro').addEventListener('submit', function (event) 
             form.classList.add('was-validated');
             // alert('Registro completado con éxito.');
             form.submit();
-            
+
             // Remover la clase de validación
 
         }
 
     };
-
-    /* xhr.onload = function () {
-     if (xhr.status >= 200 && xhr.status < 300) {
-     // Procesar la respuesta
-     const response = JSON.parse(xhr.responseText);
-     if (response.success) {
-     form.classList.remove('was-validated');
-     alert('Registro completado con éxito.');
-     form.reset();
-     } else {
-     form.usuario.classList.remove('is-invalid');
-     form.usuario.classList.add('is-valid');
-     form.password2.classList.remove('is-invalid');
-     form.email.classList.remove('is-invalid');
-     
-     // Mostrar errores específicos de cada campo
-     Object.keys(response.errors).forEach(key => {
-     const input = document.getElementById(key);
-     const feedback = input.nextElementSibling;
-     feedback.textContent = response.errors[key];
-     feedback.style.display = 'block';
-     form.classList.remove('was-validated');
-     input.classList.add('is-invalid');
-     });
-     }
-     } else {
-     console.error('Error al procesar la solicitud:', xhr.statusText);
-     }
-     }; */
 
     // Manejar errores de red
     xhr.onerror = function () {
@@ -100,10 +73,10 @@ document.getElementById('registro').addEventListener('submit', function (event) 
 
     // Enviar la solicitud
     xhr.send(formData);
-});
+}
 
 
-function validaForm(e) {
+function valida2Form(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     const form = e.target;

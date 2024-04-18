@@ -13,13 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const passwordErrorBox = document.getElementById('password2Error');
 
         // Limpia cualquier estado de error previo
-        passwordErrorBox.textContent = message;
-        //  password.setCustomValidity("");
+        passwordErrorBox.textContent = "";
 
         // Verifica si las contraseñas coinciden
         if (password1.value !== password2.value) {
-            //  password2.setCustomValidity("Los passwords introducidos deben de ser iguales");
-            //  passwordErrorBox.textContent = password2.validationMessage;
             passwordErrorBox.textContent = "Los passwords introducidos deben de ser iguales";
             event.preventDefault(); // Previene el envío del formulario
             event.stopImmediatePropagation();

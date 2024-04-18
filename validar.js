@@ -13,12 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const passwordErrorBox = document.getElementById('password2Error');
 
         // Limpia cualquier estado de error previo
-        password2.setCustomValidity("");
+        passwordErrorBox.textContent = message;
+        //  password.setCustomValidity("");
 
         // Verifica si las contraseñas coinciden
         if (password1.value !== password2.value) {
-            password2.setCustomValidity("Los passwords introducidos deben de ser iguales");
-            //   passwordErrorBox.textContent = password2.validationMessage;
+            //  password2.setCustomValidity("Los passwords introducidos deben de ser iguales");
+            //  passwordErrorBox.textContent = password2.validationMessage;
+            passwordErrorBox.textContent = "Los passwords introducidos deben de ser iguales";
             event.preventDefault(); // Previene el envío del formulario
             event.stopImmediatePropagation();
         }
@@ -37,12 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (field.id === "email" && (field.validity.valueMissing || field.validity.patternMismatch)) {
                 message = "El correo debe tener un formato correcto";
             }
-            field.setCustomValidity(message);
             errorBox.textContent = message;
         });
 
         field.addEventListener("input", () => {
-            field.setCustomValidity("");
             // Limpia el mensaje de error personalizado
             errorBox.textContent = ""; // Limpia el texto del error
         });

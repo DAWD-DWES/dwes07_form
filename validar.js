@@ -1,23 +1,16 @@
-/* document.addEventListener("DOMContentLoaded", function () {
- const registroForm = document.getElementById('registro');
- registroForm.addEventListener("submit", validaForm);
- }); */
+document.addEventListener("DOMContentLoaded", function () {
+    const registroForm = document.getElementById('registro');
+    registroForm.addEventListener("submit", validaForm);
+});
 
-function valida2Form(e) {
+function validaForm(e) {
     event.preventDefault();
     const form = this;
-
-    // Verificar la validez del formulario primero
-    /*  if (!form.checkValidity()) {
-     form.classList.add('was-validated');
-     return; // Detener la función si el formulario no es válido
-     } */
 
     // Preparar datos del formulario para enviar
     const formData = new FormData(form);
     formData.append(form.enviar.name, form.enviar.value);
-    
-    
+
     const xhr = new XMLHttpRequest();
 
     // Configurar la solicitud
@@ -48,22 +41,9 @@ function valida2Form(e) {
             }
         });
         if (response.success) {
-            Array.from(form.elements).forEach(input => {
-                input.classList.remove('is-invalid');
-                input.classList.add('is-valid');
-                if (input.nextElementSibling) {
-                    feedback = input.nextElementSibling;
-                    feedback.textContent = "";
-                }
-            });
-            form.classList.add('was-validated');
             // alert('Registro completado con éxito.');
             form.submit();
-
-            // Remover la clase de validación
-
         }
-
     };
 
     // Manejar errores de red
@@ -76,44 +56,44 @@ function valida2Form(e) {
 }
 
 
-function valida2Form(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    const form = e.target;
-    var data = new FormData(e.target);
-    data.append(form.enviar.name, form.enviar.value);
-    var objXMLHttpRequest = new XMLHttpRequest();
-    objXMLHttpRequest.responseType = 'json';
-    objXMLHttpRequest.onreadystatechange = function () {
-        if (objXMLHttpRequest.readyState === 4) {
-            if (objXMLHttpRequest.status === 200) {
-                form.usuario.setCustomValidity("");
-                form.password1.setCustomValidity("");
-                form.password2.setCustomValidity("");
-                form.email.setCustomValidity("");
-                const response = objXMLHttpRequest.response;
-                if (!(response.errorUsuario || response.errorPassword || response.errorEmail)) {
-                    e.target.submit();
-                } else {
-                    if (response.errorUsuario) {
-                        form.usuario.setCustomValidity("error");
-                    }
-                    if (response.errorPassword1) {
-                        form.password1.setCustomValidity("error");
-                    }
-                    if (response.errorPasswords) {
-                        form.password2.setCustomValidity("error");
-                    }
-                    if (response.errorEmail) {
-                        form.email.setCustomValidity("error");
-                    }
-                }
-                form.classList.add('was-validated');
-            } else {
-                alert('Error Message: ' + objXMLHttpRequest.statusText);
-            }
-        }
-    };
-    objXMLHttpRequest.open('POST', 'index.php');
-    objXMLHttpRequest.send(data);
-}
+/* function valida2Form(e) {
+ e.preventDefault();
+ e.stopImmediatePropagation();
+ const form = e.target;
+ var data = new FormData(e.target);
+ data.append(form.enviar.name, form.enviar.value);
+ var objXMLHttpRequest = new XMLHttpRequest();
+ objXMLHttpRequest.responseType = 'json';
+ objXMLHttpRequest.onreadystatechange = function () {
+ if (objXMLHttpRequest.readyState === 4) {
+ if (objXMLHttpRequest.status === 200) {
+ form.usuario.setCustomValidity("");
+ form.password1.setCustomValidity("");
+ form.password2.setCustomValidity("");
+ form.email.setCustomValidity("");
+ const response = objXMLHttpRequest.response;
+ if (!(response.errorUsuario || response.errorPassword || response.errorEmail)) {
+ e.target.submit();
+ } else {
+ if (response.errorUsuario) {
+ form.usuario.setCustomValidity("error");
+ }
+ if (response.errorPassword1) {
+ form.password1.setCustomValidity("error");
+ }
+ if (response.errorPasswords) {
+ form.password2.setCustomValidity("error");
+ }
+ if (response.errorEmail) {
+ form.email.setCustomValidity("error");
+ }
+ }
+ form.classList.add('was-validated');
+ } else {
+ alert('Error Message: ' + objXMLHttpRequest.statusText);
+ }
+ }
+ };
+ objXMLHttpRequest.open('POST', 'index.php');
+ objXMLHttpRequest.send(data);
+ } */

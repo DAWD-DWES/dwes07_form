@@ -56,7 +56,7 @@ document.getElementById('registro').addEventListener('submit', function (event) 
             });
             form.classList.add('was-validated');
             // alert('Registro completado con éxito.');
-            form.reset();
+            form.submit();
             
             // Remover la clase de validación
 

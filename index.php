@@ -4,7 +4,7 @@ define("RETRO_EMAIL_FORMATO", "El correo debe tener un formato correcto");
 define("RETRO_PASS_NO_REPETIDO", "Los passwords introducidos deben de ser iguales");
 define("RETRO_PASS_FORMATO", "El password debe tener una minúscula, mayúscula, digito y caracter espercial");
 
-if (filter_has_var(INPUT_POST, 'enviar')) {
+if (!empty($_POST)) {
     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuarioFormato = (filter_var($usuario, FILTER_VALIDATE_REGEXP, ["options" => [
                     "regexp" => "/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+){0,5}$/"]]) === false);
@@ -28,11 +28,15 @@ if (filter_has_var(INPUT_POST, 'enviar')) {
     if ($errorEmailFormato) {
         $errors['email'] = RETRO_EMAIL_FORMATO;
     }
-    $response['success'] = empty($errors);
-    $response['errors'] = $errors;
-    header('Content-type: application/json');
-    echo json_encode($response);
-    die;
+    if (filter_has_var(INPUT_POST, 'enviar')) {
+        $response['success'] = empty($errors);
+        $response['errors'] = $errors;
+        header('Content-type: application/json');
+        echo json_encode($response);
+        die;
+    } else {
+        $procesa = true;
+    }
 }
 ?>
 
@@ -49,7 +53,7 @@ if (filter_has_var(INPUT_POST, 'enviar')) {
     </head>
     <body class="bg-info">
         <div class="container mt-5">
-            <?php if (isset($error) && !$error): ?>
+            <?php if (isset($procesa)): ?>
                 <div class="alert alert-success" id="mensaje" role="alert">
                     Registro realizado con éxito
                 </div>
@@ -60,7 +64,7 @@ if (filter_has_var(INPUT_POST, 'enviar')) {
                         <h3><i class="bi bi-gear p-2"></i>Registro</h3>
                     </div>
                     <div class="card-body">
-                        <form id="registro" name="registro" action="index.php" method="POST" class="needs-validation" novalidate>
+                        <form id="registro" name="registro" action="index.php" method="POST" novalidate>
                             <div class="input-group my-2">
                                 <span class="input-group-text"><i class="bi bi-person"></i></span>
                                 <input type="text" class="form-control"  placeholder="usuario" 

@@ -1,4 +1,9 @@
 <?php
+define("RETRO_NOMBRE_FORMATO", "El nombre de estar formado por al menos 3 caracteres de palabra");
+define("RETRO_EMAIL_FORMATO", "El correo debe tener un formato correcto");
+define("RETRO_PASS_REPETIDO", "Los passwords introducidos deben de ser iguales");
+define("RETRO_PASS_FORMATO", "El password debe tener una minúscula, mayúscula, digito y caracter espercial");
+
 if (filter_has_var(INPUT_POST, 'enviar')) {
     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuarioFormato = (filter_var($usuario, FILTER_VALIDATE_REGEXP, ["options" => [
@@ -14,11 +19,6 @@ if (filter_has_var(INPUT_POST, 'enviar')) {
     $errorPassword = $errorPasswordFormato || $errorPasswordNoRepetido;
     $error = $errorUsuarioFormato || $errorEmailFormato || $errorPassword;
 }
-
-define("RETRO_NOMBRE_FORMATO", "El nombre de estar formado por al menos 3 caracteres de palabra");
-define("RETRO_EMAIL_FORMATO", "El correo debe tener un formato correcto");
-define("RETRO_PASS_REPETIDO", "Los passwords introducidos deben de ser iguales");
-define("RETRO_PASS_FORMATO", "El password debe tener una minúscula, mayúscula, digito y caracter espercial");
 ?>
 
 <!DOCTYPE html>

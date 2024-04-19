@@ -36,9 +36,6 @@ $(document).ready(function () {
                     // Si quieres hacer algo al tener éxito, como redireccionar o mostrar un mensaje
                     // alert('Registro completado con éxito.');
                     form.submit(); // O puedes redireccionar usando window.location.href a otra URL
-                    setTimeout(() => {
-                        form.reset(); // Intenta resetear el formulario después de un breve retraso
-                    }, 100);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

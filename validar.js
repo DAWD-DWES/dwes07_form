@@ -12,6 +12,7 @@ function validaForm(e) {
     formData.append(form.enviar.name, form.enviar.value);
 
     const xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
 
     // Configurar la solicitud
     xhr.open('POST', 'index.php', true);
@@ -21,8 +22,7 @@ function validaForm(e) {
     // Manejar la respuesta
     xhr.onload = function () {
         form.classList.remove('was-validated');
-        const response = JSON.parse(xhr.responseText);
-
+        const response = xhr.response;
         // Ajustar la validación en cada campo específico
         Array.from(form.elements).forEach(input => {
             if (response.errors[input.name]) {

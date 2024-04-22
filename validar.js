@@ -14,8 +14,6 @@ function validaForm(e) {
         url: 'index.php',
         type: 'POST',
         data: data,
-     //   contentType: false, // importante para enviar datos de tipo FormData
-     //   processData: false, // importante para enviar datos de tipo FormData
         dataType: 'json', // Esperamos JSON de vuelta
         success: function (response) {
             $(form).removeClass('was-validated');

@@ -6,16 +6,16 @@ function validaForm(e) {
     var form = this;
 
     // Usar el método de jQuery para crear el objeto FormData
-    var formData = new FormData(form);
-    formData.append($(form).find(':submit').attr('name'), $(form).find(':submit').val());
+    var data = $(this).serialize();
+    data += '&enviar=' + encodeURIComponent($('input[name="enviar"]').val());
 
     // Usar jQuery.ajax() para enviar los datos
     $.ajax({
         url: 'index.php',
         type: 'POST',
-        data: formData,
-        contentType: false, // importante para enviar datos de tipo FormData
-        processData: false, // importante para enviar datos de tipo FormData
+        data: data,
+     //   contentType: false, // importante para enviar datos de tipo FormData
+     //   processData: false, // importante para enviar datos de tipo FormData
         dataType: 'json', // Esperamos JSON de vuelta
         success: function (response) {
             $(form).removeClass('was-validated');

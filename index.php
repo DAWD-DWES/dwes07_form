@@ -7,7 +7,7 @@ define("RETRO_PASS_FORMATO", "El password debe tener una minúscula, mayúscula,
 if (filter_has_var(INPUT_POST, 'enviar')) {
     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_UNSAFE_RAW);
     $errorUsuarioFormato = (filter_var($usuario, FILTER_VALIDATE_REGEXP, ["options" => [
-                    "regexp" => "/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`-]+){0,5}$/"]]) === false);
+                    "regexp" => "/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`\-]+(\s+[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'´`\-]+){0,5}$/"]]) === false);
     $password1 = filter_input(INPUT_POST, 'password1', FILTER_UNSAFE_RAW);
     $password2 = filter_input(INPUT_POST, 'password2', FILTER_UNSAFE_RAW);
     $errorPasswordNoRepetido = ($password1 !== $password2);

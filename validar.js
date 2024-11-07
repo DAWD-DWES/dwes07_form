@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let message = "";
             if (field.id === "usuario" && (field.validity.valueMissing || field.validity.tooShort || field.validity.patternMismatch)) {
                 message = "El nombre debe estar formado por al menos 3 caracteres de palabra.";
-            } else if (field.id === 'password2' && (field.validity.valueMissing || field.validity.patternMismatch)) {
+            } else if (field.id === 'password1' && (field.validity.valueMissing || field.validity.patternMismatch)) {
                 message = "El password debe tener una minúscula, mayúscula, dígito y caracter especial";
             } else if (field.id === "email" && (field.validity.valueMissing || field.validity.patternMismatch)) {
                 message = "El correo debe tener un formato correcto";
